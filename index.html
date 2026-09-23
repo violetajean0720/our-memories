@@ -1,0 +1,882 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Our Little Scrapbook</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Parisienne&family=Cormorant+Garamond:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+html{scroll-behavior:smooth;}
+body{
+font-family:'Cormorant Garamond',serif;
+background:#FFF8F5;
+color:#5c4550;
+overflow-x:hidden;
+}
+
+/* background */
+body::before{
+content:"";
+position:fixed;
+inset:0;
+background:
+radial-gradient(circle at 15% 20%,rgba(255,200,220,.25),transparent 18%),
+radial-gradient(circle at 85% 25%,rgba(220,199,255,.25),transparent 18%),
+radial-gradient(circle at 20% 85%,rgba(215,186,152,.18),transparent 20%);
+pointer-events:none;
+z-index:-1;
+}
+
+.page{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+padding:40px 20px;
+position:relative;
+}
+.hidden{display:none;}
+
+/* Decorations */
+
+.stamp{
+position:absolute;
+width:54px;
+height:54px;
+border:2px dashed rgba(140,90,110,.45);
+border-radius:8px;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:24px;
+background:white;
+transform:rotate(-10deg);
+}
+
+.st1{top:30px;right:90px;}
+.st2{top:45px;right:25px;transform:rotate(10deg);}
+.st3{top:95px;right:75px;transform:rotate(-5deg);}
+.st4{top:105px;right:8px;transform:rotate(6deg);}
+
+.flower{
+position:absolute;
+font-size:34px;
+opacity:.25;
+animation:float 6s ease-in-out infinite;
+}
+
+.f1{left:8%;top:12%;}
+.f2{right:10%;bottom:15%;animation-delay:2s;}
+.f3{left:15%;bottom:12%;animation-delay:3s;}
+.f4{right:12%;top:20%;animation-delay:1s;}
+
+@keyframes float{
+50%{transform:translateY(-10px) rotate(6deg);}
+}
+
+/* LANDING */
+
+.title{
+font-family:'Parisienne',cursive;
+font-size:68px;
+color:#7b4b63;
+text-align:center;
+}
+
+.subtitle{
+font-size:22px;
+margin-top:10px;
+text-align:center;
+max-width:520px;
+}
+
+.envelope{
+margin-top:45px;
+width:300px;
+height:200px;
+background:linear-gradient(145deg,#FFD9E8,#FFC2D8);
+border-radius:18px;
+position:relative;
+box-shadow:0 20px 35px rgba(0,0,0,.08);
+}
+
+.flap{
+position:absolute;
+top:0;
+left:0;
+width:100%;
+height:60%;
+clip-path:polygon(0 0,100% 0,50% 100%);
+background:rgba(255,255,255,.45);
+transform-origin:top;
+transition:.8s;
+}
+
+.envelope.open .flap{
+transform:rotateX(180deg);
+}
+
+.seal{
+position:absolute;
+top:22px;
+left:50%;
+transform:translateX(-50%);
+width:60px;
+height:60px;
+border-radius:50%;
+background:white;
+display:flex;
+justify-content:center;
+align-items:center;
+font-size:28px;
+box-shadow:0 8px 15px rgba(0,0,0,.12);
+transition:.5s;
+}
+
+.envelope.open .seal{
+transform:translateX(-50%) scale(.7);
+opacity:0;
+}
+
+.env-text{
+position:absolute;
+bottom:22px;
+width:100%;
+text-align:center;
+}
+
+.env-text h3{
+font-size:30px;
+}
+
+.env-text p{
+font-size:16px;
+opacity:.8;
+}
+
+.open-btn{
+margin-top:35px;
+padding:14px 30px;
+background:#D79CBF;
+color:white;
+border-radius:30px;
+font-size:18px;
+}
+
+.care{
+margin-top:18px;
+font-family:'Parisienne',cursive;
+font-size:24px;
+}
+
+/* LETTER */
+
+.paper{
+background:#FFFDF9;
+border-radius:10px;
+padding:45px;
+max-width:620px;
+border:1px solid #EFE2D7;
+box-shadow:0 15px 30px rgba(0,0,0,.08);
+position:relative;
+}
+
+.paper::before{
+content:"";
+position:absolute;
+left:28px;
+top:0;
+bottom:0;
+width:2px;
+background:#EAB7C8;
+}
+
+.paper h2{
+font-family:'Parisienne',cursive;
+font-size:52px;
+margin-bottom:20px;
+color:#7b4b63;
+}
+
+.paper p{
+font-size:22px;
+line-height:1.8;
+min-height:170px;
+}
+
+.memories-btn{
+margin-top:30px;
+padding:14px 30px;
+background:#CDA0E8;
+color:white;
+border-radius:30px;
+font-size:18px;
+}
+
+/* SCRAPBOOK */
+
+#scrapbook{
+background:#FFF9F3;
+padding:70px 20px;
+}
+
+.book{
+width:min(100%,950px);
+background:#FFFDFB;
+border-radius:24px;
+padding:40px;
+box-shadow:0 20px 45px rgba(0,0,0,.08);
+position:relative;
+overflow:hidden;
+}
+
+.book::before{
+content:"";
+position:absolute;
+left:50%;
+top:0;
+bottom:0;
+width:5px;
+background:#ECD7C6;
+transform:translateX(-50%);
+}
+
+.book::after{
+content:"";
+position:absolute;
+top:20px;
+left:25px;
+right:25px;
+bottom:20px;
+border:2px solid rgba(235,220,210,.6);
+border-radius:16px;
+pointer-events:none;
+}
+
+.scrap-title{
+font-family:'Parisienne',cursive;
+font-size:58px;
+text-align:center;
+margin-bottom:40px;
+color:#7b4b63;
+}
+
+.memories{
+display:flex;
+flex-direction:column;
+gap:70px;
+}
+
+.memory{
+display:flex;
+justify-content:space-between;
+align-items:center;
+gap:35px;
+opacity:0;
+transform:translateY(70px);
+transition:1s;
+}
+
+.memory.show{
+opacity:1;
+transform:translateY(0);
+}
+
+.memory:nth-child(even){
+flex-direction:row-reverse;
+}
+
+/* POLAROID */
+
+.polaroid{
+width:250px;
+background:white;
+padding:12px 12px 18px;
+border-radius:10px;
+box-shadow:0 12px 22px rgba(0,0,0,.12);
+position:relative;
+}
+
+.memory:nth-child(odd) .polaroid{transform:rotate(-4deg);}
+.memory:nth-child(even) .polaroid{transform:rotate(4deg);}
+
+/* tape */
+
+.tape{
+position:absolute;
+top:-10px;
+left:50%;
+transform:translateX(-50%) rotate(-5deg);
+width:82px;
+height:24px;
+border-radius:4px;
+opacity:.92;
+}
+
+.pink{background:#FFBCD6;}
+.beige{background:#D9BC99;}
+.blue{background:#A9D8FF;}
+.purple{background:#DDC8FF;}
+
+/* stickers */
+
+.sticker{
+position:absolute;
+font-size:28px;
+}
+
+.s1{top:12px;right:-12px;}
+.s2{bottom:-10px;left:-8px;}
+
+.photo{
+width:100%;
+height:210px;
+background:#EFEFEF;
+border-radius:6px;
+overflow:hidden;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+opacity:0;
+animation:develop 1.2s forwards;
+}
+
+@keyframes develop{
+from{
+filter:brightness(2) grayscale(100%);
+opacity:0;
+}
+to{
+filter:none;
+opacity:1;
+}
+}
+
+.caption{
+margin-top:14px;
+text-align:center;
+}
+
+.caption h3{
+font-size:28px;
+color:#6b475d;
+}
+
+.caption span{
+font-size:15px;
+opacity:.7;
+}
+
+/* note */
+
+.note{
+background:#FFF6B7;
+padding:22px;
+border-radius:10px;
+max-width:320px;
+position:relative;
+box-shadow:0 10px 18px rgba(0,0,0,.08);
+}
+
+.note::before{
+content:"📎";
+position:absolute;
+top:-15px;
+right:12px;
+font-size:24px;
+}
+
+.note p{
+font-family:'Parisienne',cursive;
+font-size:30px;
+line-height:1.5;
+}
+
+.end-card{
+margin-top:90px;
+background:#FFFDF9;
+padding:35px;
+border-radius:18px;
+text-align:center;
+box-shadow:0 12px 22px rgba(0,0,0,.08);
+}
+
+.end-card h2{
+font-family:'Parisienne',cursive;
+font-size:50px;
+margin-bottom:12px;
+}
+
+.end-card p{
+font-size:22px;
+}
+
+.signature{
+margin-top:12px;
+font-family:'Parisienne',cursive;
+font-size:34px;
+color:#7b4b63;
+}
+
+@media(max-width:768px){
+
+.title{font-size:48px;}
+.subtitle{font-size:18px;}
+.envelope{width:250px;height:170px;}
+.paper{padding:30px;}
+.paper p{font-size:18px;}
+.book{padding:25px;}
+.book::before{display:none;}
+.memory,
+.memory:nth-child(even){
+flex-direction:column;
+}
+.polaroid{width:220px;}
+.photo{height:180px;}
+.note{max-width:260px;}
+.note p{font-size:24px;}
+.scrap-title{font-size:42px;}
+
+}
+/* ===== Hidden Surprise Effects ===== */
+
+.particle{
+position:fixed;
+pointer-events:none;
+font-size:24px;
+z-index:9999;
+animation:flyUp 1.8s ease-out forwards;
+}
+
+@keyframes flyUp{
+0%{
+transform:translateY(0) scale(.8);
+opacity:1;
+}
+100%{
+transform:translateY(-180px) translateX(var(--x)) rotate(360deg);
+opacity:0;
+}
+}
+/* ===== Secret Note ===== */
+
+.secret-note{
+position:absolute;
+top:115px;
+left:50%;
+transform:translate(-50%,-20px);
+background:#FFFDF8;
+padding:12px 18px;
+border-radius:12px;
+box-shadow:0 10px 20px rgba(0,0,0,.12);
+opacity:0;
+pointer-events:none;
+transition:.45s;
+z-index:10;
+border:1px solid #F0D8E2;
+}
+
+.secret-note p{
+font-family:"Caveat",cursive;
+font-size:24px;
+color:#8A5B73;
+white-space:nowrap;
+}
+
+.secret-note.show{
+opacity:1;
+transform:translate(-50%,0);
+}
+</style>
+</head>
+
+<body>
+
+<!-- LANDING -->
+
+<section id="landing" class="page">
+
+<div class="stamp st1">🌸</div>
+<div class="stamp st2">🌷</div>
+<div class="stamp st3">⭐</div>
+<div class="stamp st4">🪻</div>
+
+<div class="flower f1">🌸</div>
+<div class="flower f2">🪻</div>
+<div class="flower f3">🌷</div>
+<div class="flower f4">⭐</div>
+
+<h1 class="title">Our Little Scrapbook</h1>
+
+<p class="subtitle">
+Some letters are meant to be kept forever.
+</p>
+
+<div id="envelope" class="envelope">
+<div class="flap"></div>
+
+<div class="seal" id="secretSeal">💗</div>
+
+<div id="secretNote" class="secret-note">
+    <p>Psst... thanks for staying. ♡</p>
+</div>
+
+<div class="env-text">
+<h3>To Us</h3>
+<p>One little universe waiting inside.</p>
+</div>
+
+</div>
+
+<p class="care">Handle with care.</p>
+
+<button id="openLetter" class="open-btn">
+Open Letter
+</button>
+
+</section>
+
+<!-- LETTER -->
+
+<section id="letter" class="page hidden">
+
+<div class="paper">
+
+<h2>Dear Us,</h2>
+
+<p id="typing"></p>
+
+<button id="openMemories" class="memories-btn">
+Open Our Scrapbook ♡
+</button>
+
+</div>
+
+</section>
+
+<!-- SCRAPBOOK -->
+
+<section id="scrapbook" class="page hidden">
+
+<div class="book">
+
+<h2 class="scrap-title">Our Little Memories</h2>
+
+<div id="memories" class="memories"></div>
+
+<div class="end-card">
+
+<h2>Some memories stay forever.</h2>
+
+<p>
+Thank you for being part of these little moments.
+</p>
+
+<div class="signature">
+Made with love, Violeta ♡
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<script>
+
+// -------- Envelope --------
+
+const landing=document.getElementById("landing");
+const letter=document.getElementById("letter");
+const scrapbook=document.getElementById("scrapbook");
+const envelope=document.getElementById("envelope");
+
+document.getElementById("openLetter").onclick=()=>{
+
+envelope.classList.add("open");
+
+if(navigator.vibrate) navigator.vibrate(30);
+
+setTimeout(()=>{
+
+landing.classList.add("hidden");
+letter.classList.remove("hidden");
+
+typeLetter();
+
+},800);
+
+};
+
+// -------- Typing --------
+
+const text=`We laughed.
+We stayed.
+We made memories worth keeping.
+
+Thank you for becoming part of these little moments.
+I hope whenever life feels busy, this tiny scrapbook can remind us that these memories existed — and they'll always have a place here.`;
+
+let i=0;
+
+function typeLetter(){
+
+const target=document.getElementById("typing");
+
+const timer=setInterval(()=>{
+
+target.innerHTML+=text.charAt(i);
+
+i++;
+
+if(i>=text.length){
+clearInterval(timer);
+}
+
+},22);
+
+}
+
+// -------- Memories --------
+
+// GANTI FOTO DI SINI NANTI
+
+const memories=[
+
+{
+name:"For Nopik",
+date:"02 · 11· 2009",
+note:"I hope this smile stays forever.",
+img:"image/nopik.JPG",
+tape:"pink",
+s1:"🐰",
+s2:"🌸"
+},
+
+{
+name:"For Riki",
+date:"02 · 03 · 2010",
+note:"Some conversations never really end.",
+img:"image/riki.JPG",
+tape:"beige",
+s1:"🐻",
+s2:"🌷"
+},
+
+{
+name:"For Hendy",
+date:"28 · 07 · 2010",
+note:"The quiet days became beautiful too.",
+img:"image/riki.JPG",
+tape:"blue",
+s1:"☁️",
+s2:"⭐"
+},
+
+{
+name:"For Violeta",
+date:"20 · 07 · 2010",
+note:"Home can be people too.",
+img:"image/violeta.JPG",
+tape:"purple",
+s1:"🦋",
+s2:"🪻"
+}
+
+];
+
+document.getElementById("openMemories").onclick=()=>{
+
+letter.classList.add("hidden");
+scrapbook.classList.remove("hidden");
+
+const wrap=document.getElementById("memories");
+
+memories.forEach((m,index)=>{
+
+const card=document.createElement("div");
+
+card.className="memory";
+
+card.innerHTML=`
+
+<div class="polaroid">
+
+<div class="tape ${m.tape}"></div>
+
+<div class="sticker s1">${m.s1}</div>
+
+<div class="sticker s2">${m.s2}</div>
+
+<div class="photo">
+<img src="${m.img}" alt="">
+</div>
+
+<div class="caption">
+<h3>${m.name}</h3>
+<span>${m.date}</span>
+</div>
+
+</div>
+
+<div class="note">
+<p>"${m.note}"</p>
+</div>
+
+`;
+
+wrap.appendChild(card);
+
+setTimeout(()=>{
+
+card.classList.add("show");
+
+},index*450);
+
+});
+
+};
+// ===== Hidden Surprise Double Tap =====
+
+const emojis={
+"Hendy":["☁️","⭐","✨"],
+"Nopik":["🌸","💗","🌸"],
+"Riki":["🌷","🍃","🌼"],
+"Violeta":["🦋","🪻","💜"]
+};
+
+function createParticles(x,y,list){
+
+for(let i=0;i<18;i++){
+
+const p=document.createElement("div");
+
+p.className="particle";
+
+p.textContent=list[Math.floor(Math.random()*list.length)];
+
+p.style.left=x+"px";
+p.style.top=y+"px";
+
+p.style.setProperty("--x",(Math.random()*140-70)+"px");
+
+document.body.appendChild(p);
+
+setTimeout(()=>p.remove(),1800);
+
+}
+
+}
+
+// Pas semua memory udah muncul
+const observer=new MutationObserver(()=>{
+
+document.querySelectorAll(".polaroid").forEach(card=>{
+
+if(card.dataset.tap) return;
+
+card.dataset.tap="true";
+
+let lastTap=0;
+
+card.addEventListener("click",function(e){
+
+const now=Date.now();
+
+if(now-lastTap<300){
+
+const name=this.querySelector("h3").textContent.replace("For ","");
+
+createParticles(
+e.clientX,
+e.clientY,
+emojis[name]||["💖"]
+);
+
+}
+
+lastTap=now;
+
+});
+
+});
+
+});
+
+observer.observe(document.getElementById("memoryWrap"),{
+childList:true
+});
+
+// ===== Secret Seal Hold =====
+
+const seal=document.getElementById("secretSeal");
+const secret=document.getElementById("secretNote");
+
+let holdTimer;
+
+function surpriseBurst(x,y){
+
+const icons=["🌸","💗","✨","🪻"];
+
+for(let i=0;i<15;i++){
+
+const p=document.createElement("div");
+
+p.className="particle";
+p.textContent=icons[Math.floor(Math.random()*icons.length)];
+
+p.style.left=x+"px";
+p.style.top=y+"px";
+
+p.style.setProperty("--x",(Math.random()*120-60)+"px");
+
+document.body.appendChild(p);
+
+setTimeout(()=>p.remove(),1800);
+
+}
+
+}
+
+seal.addEventListener("pointerdown",(e)=>{
+
+holdTimer=setTimeout(()=>{
+
+secret.classList.add("show");
+
+surpriseBurst(e.clientX,e.clientY);
+
+setTimeout(()=>{
+
+secret.classList.remove("show");
+
+},2600);
+
+},1000);
+
+});
+
+["pointerup","pointerleave","pointercancel"].forEach(event=>{
+
+seal.addEventListener(event,()=>{
+
+clearTimeout(holdTimer);
+
+});
+
+});
+
+</script>
+
+</body>
+</html>
